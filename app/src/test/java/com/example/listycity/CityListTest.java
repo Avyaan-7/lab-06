@@ -39,65 +39,43 @@ class CityListTest {
     void testHasCity() {
         CityList cityList = mockCityList();
         City city = mockCity();
-
-        // Test that the city exists in the list
         assertTrue(cityList.hasCity(city));
-
-        // Test that a city not in the list returns false
-        City newCity = new City("Calgary", "Alberta");
+        City newCity = new City("Edmonton", "Alberta");
         assertFalse(cityList.hasCity(newCity));
     }
 
-    // Test delete method - successful deletion
     @Test
     void testDelete() {
         CityList cityList = mockCityList();
         City city = mockCity();
-
-        // Verify the city is in the list
         assertTrue(cityList.hasCity(city));
         assertEquals(1, cityList.countCities());
-
-        // Delete the city
         cityList.delete(city);
-
-        // Verify it was removed
         assertFalse(cityList.hasCity(city));
         assertEquals(0, cityList.countCities());
     }
 
-    // Test delete method - exception when city not in list
     @Test
     void testDeleteException() {
         CityList cityList = mockCityList();
-        City city = new City("Vancouver", "British Columbia");
-
-        // Verify the city is NOT in the list
+        City city = new City("Kelowna", "British Columbia");
         assertFalse(cityList.hasCity(city));
-
-        // Try to delete a city that doesn't exist - should throw exception
         assertThrows(IllegalArgumentException.class, () -> {
             cityList.delete(city);
         });
     }
 
-    // Test countCities method
+    // LLM Was used to get the testCountCities
     @Test
     void testCountCities() {
         CityList cityList = new CityList();
-
-        // Empty list should have 0 cities
         assertEquals(0, cityList.countCities());
-
-        // Add one city
         cityList.add(new City("Toronto", "Ontario"));
         assertEquals(1, cityList.countCities());
 
         // Add another city
         cityList.add(new City("Montreal", "Quebec"));
         assertEquals(2, cityList.countCities());
-
-        // Add a third city
         cityList.add(new City("Halifax", "Nova Scotia"));
         assertEquals(3, cityList.countCities());
     }
